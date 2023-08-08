@@ -3,8 +3,9 @@
 
 def magic_calculation(a, b, c):
     """A function that matches the provided bytecode."""
-    if a < b):
+    if a < b:
         return (c)
-    if c > b):
+    if c > b:
         return (a + b)
+
     return (a * b - c)
