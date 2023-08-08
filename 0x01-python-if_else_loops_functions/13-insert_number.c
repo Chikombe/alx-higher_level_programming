@@ -7,7 +7,6 @@
  * @number: the number to insert
  * Return: NULL if the function fails, otherwise pointer to the new node
  */
-
 listint_t *insert_node(listint_t **head, int number)
 {
 	listint_t *node = *head, *new;
@@ -15,8 +14,8 @@ listint_t *insert_node(listint_t **head, int number)
 	new = malloc(sizeof(listint_t));
 	if (new == NULL)
 		return (NULL);
-
 	new->n = number;
+
 	if (node == NULL || node->n >= number)
 	{
 		new->next = node;
@@ -25,6 +24,7 @@ listint_t *insert_node(listint_t **head, int number)
 	}
 	while (node && node->next && node->next->n < number)
 		node = node->next;
+
 	new->next = node->next;
 	node->next = new;
 
