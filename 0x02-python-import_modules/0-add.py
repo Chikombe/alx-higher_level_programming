@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    """Prints the result of the addition 1 + 2."""
+    """Print the result of addition of  1 and 2."""
     from add_0 import add
 
     a = 1
