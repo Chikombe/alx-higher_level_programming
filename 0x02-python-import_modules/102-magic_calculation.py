@@ -8,6 +8,8 @@ def magic_calculation(a, b):
         c = add(a, b)
         for itr in range(4, 6):
             c = add(c, itr)
-            return(c)
-        else:
-            return(sub(a, b))
+        return(c)
+
+    else:
+
+        return(sub(a, b))
