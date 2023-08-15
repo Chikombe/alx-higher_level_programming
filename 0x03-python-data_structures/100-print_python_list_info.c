@@ -1,21 +1,25 @@
-import ctypes
+#include <Python.h>
 
-lib = ctypes.CDLL('./libPyList.so')
-lib.print_python_list_info.argtypes = [ctypes.py_object]
-l = ['hello', 'World']
-lib.print_python_list_info(l)
-del l[1]
-lib.print_python_list_info(l)
-l = l + [4, 5, 6.0, (9, 8), [9, 8, 1024], "Holberton"]
-lib.print_python_list_info(l)
-l = []
-lib.print_python_list_info(l)
-l.append(0)
-lib.print_python_list_info(l)
-l.append(1)
-l.append(2)
-l.append(3)
-l.append(4)
-lib.print_python_list_info(l)
-l.pop()
-lib.print_python_list_info(l)
+/**
+ * print_python_list_info - Prints basic info about Python lists.
+ * @p: A PyObject list.
+ */
+void print_python_list_info(PyObject *p)
+{
+	int size, alloc, itr;
+	PyObject *obj;
+
+	size = Py_SIZE(p);
+	alloc = ((PyListObject *)p)->allocated;
+
+	printf("[*] Size of the Python List = %d\n", size);
+	printf("[*] Allocated = %d\n", alloc);
+
+	for (itr = 0; itr < size; itr++)
+	{
+		printf("Element %d: ", itr);
+
+		obj = PyList_GetItem(p, itr);
+		printf("%s\n", Py_TYPE(obj)->tp_name);
+	}
+}
