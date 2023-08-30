@@ -28,10 +28,10 @@ class Square:
 
         def area(self):
             """Return the current area of the square."""
-        return (self.__size * self.__size)
+            return (self.__size * self.__size)
 
     def __eq__(self, other):
-        """Define the == comparision to a Square."""
+        """Define the == comparison to a Square."""
         return self.area() == other.area()
 
     def __ne__(self, other):
@@ -51,5 +51,5 @@ class Square:
         return self.area() > other.area()
 
     def __ge__(self, other):
-        """Define the >= compmarison to a Square."""
+        """Define the >= comparison to a Square."""
         return self.area() >= other.area()
