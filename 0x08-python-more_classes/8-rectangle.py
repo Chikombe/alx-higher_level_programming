@@ -82,18 +82,19 @@ class Rectangle:
         Represents the rectangle with character #."""
         if self.__width == 0 or self.__height == 0:
             return ("")
-        rectangle = []
+
+        rect = []
         for itr in range(self.__height):
-            [rectangle.append('#') for index in range(self.__width)]
+            [rect.append('#') for index in range(self.__width)]
             if itr != self.__height - 1:
-                rectangle.append("\n")
-        return ("".join(rectangle))
+                rect.append("\n")
+        return ("".join(rect))
 
     def __repr__(self):
         """Returns the string representation of the rectangle."""
-        rectangle = "Rectangle(" + str(self.__width)
-        rectangle += ", " + str(self.__height) + ")"
-        return (rectangle)
+        rect = "Rectangle(" + str(self.__width)
+        rect += ", " + str(self.__height) + ")"
+        return (rect)
 
     def __del__(self):
         """Print a message whenever a rectangle is deleted."""
