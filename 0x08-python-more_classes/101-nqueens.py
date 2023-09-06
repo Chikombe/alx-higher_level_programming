@@ -50,46 +50,46 @@ def xout(board, row, column):
 
     Arguments:
         board(int): The current working chessboard.
-        row(int): The row where a queen was last played.
+        current_row(int): The row where a queen was last played.
         column(int): The column where a queen was last played.
     """
 
     # X out all forward spots
     for col in range(column + 1, len(board)):
-        board[row][col] = "x"
+        board[current_row][col] = "x"
     # X out all backward spots
     for col in range(column - 1, -1, -1):
-        board[row][col] = "x"
+        board[current_row][col] = "x"
     # X out all spots below
-    for row in range(row + 1, len(board)):
+    for row in range(current_row + 1, len(board)):
         board[row][column] = "x"
     # X out all spots above
-    for row in range(row - 1, -1, -1):
+    for row in range(current_row - 1, -1, -1):
         board[row][column] = "x"
     # X out all spots diagonally down to the right
     col = column + 1
-    for row in range(row + 1, len(board)):
+    for row in range(current_row + 1, len(board)):
         if col >= len(board):
             break
         board[row][col] = "x"
         col += 1
     # X out all spots diagnally up to the left
     col = column - 1
-    for row in range(row - 1, -1, -1):
+    for row in range(current_row - 1, -1, -1):
         if col < 0:
             break
         board[row][col]
         col -= 1
     # X out all spots diagonally up to the right
     col = column + 1
-    for row in range(row - 1, -1, -1):
+    for row in range(current_row - 1, -1, -1):
         if col >= len(board):
             break
         board[row][col] = "x"
         col += 1
     # X out all spots diagonally down to the left
     col = column - 1
-    for row in range(row + 1, len(board)):
+    for row in range(current_row + 1, len(board)):
         if col < 0:
             break
         board[row][col] = "x"
