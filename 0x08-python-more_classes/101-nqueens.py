@@ -87,12 +87,12 @@ def xout(board, row, column):
             break
         board[row][col] = "x"
         col += 1
-    # x out all spots diagonally down to the left
+    # X out all spots diagonally down to the left
     col = column - 1
     for row in range(row + 1, len(board)):
         if col < 0:
             break
-        board[row][col]
+        board[row][col] = "x"
         col -= 1
 
 
