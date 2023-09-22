@@ -153,13 +153,13 @@ class Base:
             list_rectangles(list): A list of rectangle objects to draw.
             list_squares(list): A list of square objects to draw.
         """
-        t = turle.Turtle()
-        t.scree.bgcolour("#b7312c")
+        t = turtle.Turtle()
+        t.screen.bgcolor("#b7312c")
         t.pensize(3)
         t.shape("turtle")
 
-        t.colour("#ffffff")
-        for rect in list_rectangle:
+        t.pencolor("#ffffff")
+        for rect in list_rectangles:
             t.showturtle()
             t.up()
             t.goto(rect.x, rect.y)
@@ -171,7 +171,8 @@ class Base:
                 t.left(90)
             t.hideturtle()
 
-        t.colour("#b5e3d8")
+        t.fillcolor("#b5e3d8")
+        t.pencolour("#b5e3d8")
         for sq in list_squares:
             t.showturtle()
             t.up()
