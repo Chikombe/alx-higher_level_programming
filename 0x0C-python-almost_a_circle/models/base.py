@@ -172,7 +172,7 @@ class Base:
             t.hideturtle()
 
         t.fillcolor("#b5e3d8")
-        t.pencolour("#b5e3d8")
+        t.pencolor("#b5e3d8")
         for sq in list_squares:
             t.showturtle()
             t.up()
