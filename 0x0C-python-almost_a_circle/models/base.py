@@ -5,6 +5,7 @@ import json
 import csv
 import turtle
 
+
 class Base:
     """A representation of the base model.
 
@@ -49,6 +50,7 @@ class Base:
         if json_string is None or json_string == "[]":
             return []
         return json.loads(json_string)
+
     @classmethod
     def save_to_file(cls, list_objs):
         """Saves the JSON list of directories that is serialized.
@@ -63,6 +65,7 @@ class Base:
             else:
                 list_dicts = [o.to_dictionary() for o in list_objs]
                 jsonfile.write(Base.to_json_string(list_dicts))
+
     @classmethod
     def create(cls, **dictionary):
         """Return instances created from a dictionary representation.
@@ -79,6 +82,7 @@ class Base:
             raise ValueError("Invalid class name")
         new.update(**dictionary)
         return new
+
     @classmethod
     def load_from_file(cls):
         """Returns a list of classes loaded from a file.
@@ -95,7 +99,8 @@ class Base:
                 list_dicts = Base.from_json_string(jsonfile.read())
                 return [cls.create(**d) for d in list_dicts]
         except IOError as e:
-                return []
+            return []
+
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Saves objects to csv file.
@@ -115,6 +120,7 @@ class Base:
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 for obj in list_objs:
                     writer.writerow(obj.to_dictionary())
+
     @classmethod
     def load_from_file_csv(cls):
         """Loads lists from csv file.
@@ -134,10 +140,11 @@ class Base:
                     fieldnames = ["id", "size", "x", "y"]
                 list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
                 list_dicts = [dict([k, int(v)] for k, v in d.items())
-                        for d in list_dicts]
+                              for d in list_dicts]
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
+
     @staticmethod
     def draw(list_rectangles, list_squares):
         """Draw Rectangles and Squares using the turtle module.
@@ -170,7 +177,7 @@ class Base:
             t.up()
             t.goto(sq.x, sq.y)
             t.down()
-            for i in range (2):
+            for i in range(2):
                 t.forward(sq.width)
                 t.left(90)
                 t.forward(sq.height)
