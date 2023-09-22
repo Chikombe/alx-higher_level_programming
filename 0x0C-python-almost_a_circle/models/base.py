@@ -30,14 +30,14 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Returns the JSON list of directories that is serialized.
+        """Returns the JSON list of dictionaries that is serialized.
 
         Args:
-            list_directories(list): A list of directories.
+            list_dictionaries(list): A list of directionaries.
         """
-        if list_directories is None or list_directories == []:
+        if list_dictionaries is None or list_dictionaries == []:
             return "[]"
-        return json.dumps(list_directories)
+        return json.dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
@@ -60,23 +60,25 @@ class Base:
         with open(filename, "w") as jsonfile:
             if list_objs is None:
                 jsonfile.write("[]")
-        else:
-            list_dicts = [o.to_dictionary() for o in list_objs]
-            jsonfile.write(Base.to_json_string(list_dicts))
+            else:
+                list_dicts = [o.to_dictionary() for o in list_objs]
+                jsonfile.write(Base.to_json_string(list_dicts))
     @classmethod
     def create(cls, **dictionary):
-        """Return loads instances from dictionary.
+        """Return instances created from a dictionary representation.
 
         Args:
-            **dictionary(dict): The Key/value of pairs to intitialize.
+            **dictionary(dict): A dictionary containing
+            attributes to initialize.
         """
-        if dictionary and dictionary != {}:
-            if cls.__name__ == "Rectangle":
-                new = cls(1, 1)
-            else:
-                new = cls(1)
-                new.update(**dictionary)
-                return new
+        if cls.__name__ == "Rectangle":
+            new = cls(1, 1)
+        elif cls.__name__ == "Square":
+            new = cls(1)
+        else:
+            raise ValueError("Invalid class name")
+        new.update(**dictionary)
+        return new
     @classmethod
     def load_from_file(cls):
         """Returns a list of classes loaded from a file.
@@ -91,8 +93,8 @@ class Base:
         try:
             with open(filename, "r") as jsonfile:
                 list_dicts = Base.from_json_string(jsonfile.read())
-                return [cls.create(**d) dor d in list_dicts]
-            except IOError:
+                return [cls.create(**d) for d in list_dicts]
+        except IOError as e:
                 return []
     @classmethod
     def save_to_file_csv(cls, list_objs):
@@ -112,7 +114,7 @@ class Base:
                     fieldnames = ["id", "size", "x", "y"]
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 for obj in list_objs:
-                    writer.writerow(obj_to_dictionary())
+                    writer.writerow(obj.to_dictionary())
     @classmethod
     def load_from_file_csv(cls):
         """Loads lists from csv file.
@@ -125,7 +127,7 @@ class Base:
         """
         filename = cls.__name__ + ".csv"
         try:
-            with open(filename, "r", newline="") as csvfile
+            with open(filename, "r", newline="") as csvfile:
                 if cls.__name__ == "Rectangle":
                     fieldnames = ["id", "width", "height", "x", "y"]
                 else:
@@ -133,7 +135,7 @@ class Base:
                 list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
                 list_dicts = [dict([k, int(v)] for k, v in d.items())
                         for d in list_dicts]
-                return [cls.create(**d) for d in list_dict]
+                return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
     @staticmethod
