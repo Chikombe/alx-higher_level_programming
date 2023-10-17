@@ -112,7 +112,7 @@ class Base:
                     fieldnames = ["id", "size", "x", "y"]
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 for obj in list_objs:
-                    writer.writerow(obj_to_dictionary())
+                    writer.writerow(obj.to_dictionary())
     @classmethod
     def load_from_file_csv(cls):
         """Loads lists from csv file.
